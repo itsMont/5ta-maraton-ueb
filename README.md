@@ -25,8 +25,8 @@ Vídeo de competencia 📹: https://www.youtube.com/watch?v=vuDnrEHvBXg
 - G ✅
 - H ✅
 - I ✅
-- J 
-- K
+- J ✅
+- K ✅
 - L 
 - M ✅
 - N ✅
