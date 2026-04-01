@@ -19,22 +19,36 @@ int main()
                 cin>>costos[i][j];
             }
         }
-        for(int i = n-1; i > 0 ; i--)
+        // Usando DP con bit mask (Consultar libro programación competitiva)
+        // Precio de no hacer ninguna tarea: 0
+        int precios[(1<<n)];
+        fill(precios, precios + (1<<n), 1e9);
+        precios[0] = 0;
+        // para n=3, las posibles masks son 000,001,010,011,100,101, 110, 111
+        for(int mask = 0; mask < (1<<n); mask++)
         {
-            ans += costos[i][i];
-            for(int j = 1; j<= n - i; j++)
+            // Navegar matriz
+            for(int i = 0; i < n; i++)
             {
-                if(min(ans + costos [i][i-j], ans + costos[i-j][i] ) == ans + costos [i][i-j] )
+                // Precio del i-esimo trabajo
+                int iPrecio = costos[i][i];
+                // revisar si no está prendido en la i-esima posicion
+                if(!(mask & (1<<i) ) )
                 {
-                    ans += costos [i][i-j];
+                    // actualiza precio con recargos de trabajos ya hechos antes de encender
+                    for(int j = 0; j < n; j++)
+                    {
+                        // Si ya se hizo j
+                        if(mask & (1<<j))
+                            iPrecio += costos[i][j];
+                    }
+                // actualizar mask. Encender el siguiente trabajo
+                int next = mask | (1<<i);
+                precios[next] = min( iPrecio + precios[mask], precios[next]);
                 }
-                if(min(ans + costos [i][i-j], ans + costos[i-j][i] ) == ans + costos [i-j][i])
-                    ans += costos[i-j][i];
             }
         }
-        // Sumar el ultimo costo
-        ans += costos[0][0];
-        cout<<"Case "<<caso<<": "<<ans<<"\n";
+        cout<<"Case "<<caso<<": "<<precios[(1<<n) -1]<<"\n";
         caso++;
     }
 
