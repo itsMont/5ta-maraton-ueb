@@ -20,7 +20,7 @@ Vídeo de competencia 📹: https://www.youtube.com/watch?v=vuDnrEHvBXg
 - B ✅
 - C ✅ (Problemas con judger)
 - D ✅ (Problemas con judger)
-- E
+- E ✅
 - F ✅
 - G ✅
 - H ✅
